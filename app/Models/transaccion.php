@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class transaccion extends Model
 {
     protected $connection = 'mysql';
+
     use SoftDeletes;
 
     public $table = 'transaccions';
