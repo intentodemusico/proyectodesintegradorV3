@@ -29,7 +29,7 @@ class productoController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->productoRepository->Schema::connection('mysql')->pushCriteria(new RequestCriteria($request));
+        $this->productoRepository->pushCriteria(new RequestCriteria($request));
         $productos = $this->productoRepository->all();
         return view('productos.index')
             ->with('productos', $productos);
