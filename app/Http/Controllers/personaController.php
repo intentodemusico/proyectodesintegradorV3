@@ -72,9 +72,9 @@ class personaController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show($idPersona)
     {
-        $persona = $this->personaRepository->findWithoutFail($id);
+        $persona = $this->personaRepository->findWithoutFail($idPersona);
 
         if (empty($persona)) {
             Flash::error('Persona not found');
@@ -92,10 +92,10 @@ class personaController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit($idPersona)
     {
-        $persona = $this->personaRepository->findWithoutFail($id);
-
+        $persona = $this->personaRepository->findWithoutFail($idPersona);
+        
         if (empty($persona)) {
             Flash::error('Persona not found');
 
@@ -113,9 +113,9 @@ class personaController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdatepersonaRequest $request)
+    public function update($idPersona, UpdatepersonaRequest $request)
     {
-        $persona = $this->personaRepository->findWithoutFail($id);
+        $persona = $this->personaRepository->findWithoutFail($idPersona);
 
         if (empty($persona)) {
             Flash::error('Persona not found');
@@ -123,7 +123,7 @@ class personaController extends AppBaseController
             return redirect(route('personas.index'));
         }
 
-        $persona = $this->personaRepository->update($request->all(), $id);
+        $persona = $this->personaRepository->update($request->all(), $idPersona);
 
         Flash::success('Persona updated successfully.');
 
@@ -137,9 +137,9 @@ class personaController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($idPersona)
     {
-        $persona = $this->personaRepository->findWithoutFail($id);
+        $persona = $this->personaRepository->findWithoutFail($idPersona);
 
         if (empty($persona)) {
             Flash::error('Persona not found');
@@ -147,7 +147,7 @@ class personaController extends AppBaseController
             return redirect(route('personas.index'));
         }
 
-        $this->personaRepository->delete($id);
+        $this->personaRepository->delete($idPersona);
 
         Flash::success('Persona deleted successfully.');
 
