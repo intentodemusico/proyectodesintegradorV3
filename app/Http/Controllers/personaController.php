@@ -8,6 +8,7 @@ use App\Repositories\personaRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use DB;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -29,8 +30,8 @@ class personaController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->personaRepository->pushCriteria(new RequestCriteria($request));
-        $personas = $this->personaRepository->all();
+        $personas  = DB::connection('mysql')->select('select * from personas');
+        
 
         return view('personas.index')
             ->with('personas', $personas);

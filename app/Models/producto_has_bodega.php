@@ -17,8 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class producto_has_bodega extends Model
 {
-    protected $connection = 'mysql';
-    
+
     use SoftDeletes;
 
     public $table = 'producto_has_bodegas';

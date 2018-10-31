@@ -29,10 +29,12 @@ class productoController extends AppBaseController
      */
     public function index(Request $request)
     {
+        //$users = DB::connection('mysql')->select('select * from products');
         $this->productoRepository->pushCriteria(new RequestCriteria($request));
         $productos = $this->productoRepository->all();
         return view('productos.index')
             ->with('productos', $productos);
+        
     }
 
     /**

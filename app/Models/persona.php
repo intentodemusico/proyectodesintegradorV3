@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class persona extends Model
 {
-    protected $connection = 'mysql';
+   
     
     use SoftDeletes;
 

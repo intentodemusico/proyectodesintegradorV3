@@ -18,8 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class proveedor extends Model
 {
-    protected $connection = 'mysql';
-    
+   
     use SoftDeletes;
 
     public $table = 'proveedors';

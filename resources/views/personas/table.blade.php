@@ -1,7 +1,8 @@
 <table class="table table-responsive" id="personas-table">
     <thead>
         <tr>
-            <th>Apellido</th>
+            <th>idPersona</th>
+        <th>Apellido</th>
         <th>Cedula</th>
         <th>Direccion</th>
         <th>Nombre</th>
@@ -11,8 +12,9 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($personas as $persona)
+    @foreach($personas as $persona) 
         <tr>
+            <td>{!! $persona->idPersona !!}</td>
             <td>{!! $persona->Apellido !!}</td>
             <td>{!! $persona->Cedula !!}</td>
             <td>{!! $persona->Direccion !!}</td>
@@ -20,7 +22,7 @@
             <td>{!! $persona->Telefono !!}</td>
             <td>{!! $persona->Tipo_Persona_idTipo_Persona !!}</td>
             <td>
-                {!! Form::open(['route' => ['personas.destroy', $persona->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['personas.destroy', $persona->id], 'method' => 'delete']) !!}        
                 <div class='btn-group'>
                     <a href="{!! route('personas.show', [$persona->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                     <a href="{!! route('personas.edit', [$persona->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>

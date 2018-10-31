@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateproveedorRequest;
+use DB;
 use App\Http\Requests\UpdateproveedorRequest;
 use App\Repositories\proveedorRepository;
 use App\Http\Controllers\AppBaseController;
@@ -28,12 +29,12 @@ class proveedorController extends AppBaseController
      * @return Response
      */
     public function index(Request $request)
-    {
-        $this->proveedorRepository->pushCriteria(new RequestCriteria($request));
-        $proveedors = $this->proveedorRepository->all();
+    
+    {  
 
-        return view('proveedors.index')
-            ->with('proveedors', $proveedors);
+        $proveedors  = DB::connection('mysql')->select('select * from proveedors');
+        dd($proveedors);
+
     }
 
     /**
