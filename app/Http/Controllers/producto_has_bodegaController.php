@@ -8,6 +8,7 @@ use App\Repositories\producto_has_bodegaRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use DB;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -29,8 +30,7 @@ class producto_has_bodegaController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->productoHasBodegaRepository->pushCriteria(new RequestCriteria($request));
-        $productoHasBodegas = $this->productoHasBodegaRepository->all();
+        $productoHasBodegas= DB::connection('mysql')->select('select * from producto_has_bodegas');
 
         return view('producto_has_bodegas.index')
             ->with('productoHasBodegas', $productoHasBodegas);

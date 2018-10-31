@@ -8,6 +8,7 @@ use App\Repositories\transaccionRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use DB;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -28,10 +29,7 @@ class transaccionController extends AppBaseController
      * @return Response
      */
     public function index(Request $request)
-    {
-        $this->transaccionRepository->pushCriteria(new RequestCriteria($request));
-        $transaccions = $this->transaccionRepository->all();
-
+    { $transaccions  = DB::connection('mysql')->select('select * from transaccions');
         return view('transaccions.index')
             ->with('transaccions', $transaccions);
     }

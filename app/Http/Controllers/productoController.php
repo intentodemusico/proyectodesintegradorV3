@@ -8,6 +8,7 @@ use App\Repositories\productoRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use DB;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -29,9 +30,7 @@ class productoController extends AppBaseController
      */
     public function index(Request $request)
     {
-        //$users = DB::connection('mysql')->select('select * from products');
-        $this->productoRepository->pushCriteria(new RequestCriteria($request));
-        $productos = $this->productoRepository->all();
+        $productos= DB::connection('mysql')->select('select * from productos');
         return view('productos.index')
             ->with('productos', $productos);
         

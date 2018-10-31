@@ -7,8 +7,10 @@ use App\Http\Requests\UpdatepersonaRequest;
 use App\Repositories\personaRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use App\Models\persona;
 use Flash;
 use DB;
+use ON;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -29,9 +31,9 @@ class personaController extends AppBaseController
      * @return Response
      */
     public function index(Request $request)
-    {
-        $personas  = DB::connection('mysql')->select('select * from personas');
+    {   
         
+        $personas= DB::connection('mysql')->select('select * from personas');
 
         return view('personas.index')
             ->with('personas', $personas);
@@ -57,9 +59,13 @@ class personaController extends AppBaseController
     public function store(CreatepersonaRequest $request)
     {
         $input = $request->all();
+        //onnection('mysql')-> 
+        $connection = 'mysql';
 
-        $persona = $this->personaRepository->create($input);
-
+$db = DB::connection($connection);
+        
+        $persona = $this->personaRepository->$db->create($input);
+        
         Flash::success('Persona saved successfully.');
 
         return redirect(route('personas.index'));
@@ -74,7 +80,7 @@ class personaController extends AppBaseController
      */
     public function show($idPersona)
     {
-        $persona = $this->personaRepository->findWithoutFail($idPersona);
+        $persona = DB::connection('mysql')->$this->personaRepository->findWithoutFail($idPersona);
 
         if (empty($persona)) {
             Flash::error('Persona not found');
@@ -94,7 +100,9 @@ class personaController extends AppBaseController
      */
     public function edit($idPersona)
     {
-        $persona = $this->personaRepository->findWithoutFail($idPersona);
+
+        $persona = persona::on('mysql')->find($idPersona);//DB::connection('mysql')->select('select * from personas where idPersona=$idPersona');
+        //
         
         if (empty($persona)) {
             Flash::error('Persona not found');
@@ -115,7 +123,7 @@ class personaController extends AppBaseController
      */
     public function update($idPersona, UpdatepersonaRequest $request)
     {
-        $persona = $this->personaRepository->findWithoutFail($idPersona);
+        $persona = DB::connection('mysql')->$this->personaRepository->findWithoutFail($idPersona);
 
         if (empty($persona)) {
             Flash::error('Persona not found');
@@ -123,7 +131,7 @@ class personaController extends AppBaseController
             return redirect(route('personas.index'));
         }
 
-        $persona = $this->personaRepository->update($request->all(), $idPersona);
+        $persona = DB::connection('mysql')->$this->personaRepository->update($request->all(), $idPersona);
 
         Flash::success('Persona updated successfully.');
 
@@ -139,7 +147,7 @@ class personaController extends AppBaseController
      */
     public function destroy($idPersona)
     {
-        $persona = $this->personaRepository->findWithoutFail($idPersona);
+        $persona = DB::connection('mysql')->$this->personaRepository->findWithoutFail($idPersona);
 
         if (empty($persona)) {
             Flash::error('Persona not found');
@@ -147,7 +155,7 @@ class personaController extends AppBaseController
             return redirect(route('personas.index'));
         }
 
-        $this->personaRepository->delete($idPersona);
+        DB::connection('mysql')->$this->personaRepository->delete($idPersona);
 
         Flash::success('Persona deleted successfully.');
 

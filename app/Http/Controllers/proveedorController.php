@@ -32,8 +32,11 @@ class proveedorController extends AppBaseController
     
     {  
 
+
         $proveedors  = DB::connection('mysql')->select('select * from proveedors');
-        dd($proveedors);
+        return view('proveedors.index')
+        ->with('proveedors', $proveedors);
+
 
     }
 

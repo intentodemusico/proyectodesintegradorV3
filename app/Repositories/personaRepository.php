@@ -10,8 +10,8 @@ use InfyOm\Generator\Common\BaseRepository;
  * @package App\Repositories
  * @version October 30, 2018, 3:59 am UTC
  *
- * @method persona findWithoutFail($id, $columns = ['*'])
- * @method persona find($id, $columns = ['*'])
+ * @method persona findWithoutFail($idPersona, $columns = ['*'])
+ * @method persona find($idPersona, $columns = ['*'])
  * @method persona first($columns = ['*'])
 */
 class personaRepository extends BaseRepository
@@ -20,6 +20,7 @@ class personaRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
+        'idPersona',
         'Apellido',
         'Cedula',
         'Direccion',
