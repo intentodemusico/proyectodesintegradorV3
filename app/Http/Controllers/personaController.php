@@ -58,13 +58,12 @@ class personaController extends AppBaseController
      */
     public function store(CreatepersonaRequest $request)
     {
-        $input = $request->all();
-        //onnection('mysql')-> 
         $connection = 'mysql';
 
-$db = DB::connection($connection);
-        
-        $persona = $this->personaRepository->$db->create($input);
+        $db = DB::connection($connection);
+        $input = $request->all();
+        $persona=$db->select('select * from personas');
+        $persona = $this->personaRepository->create($input);
         
         Flash::success('Persona saved successfully.');
 
@@ -100,10 +99,11 @@ $db = DB::connection($connection);
      */
     public function edit($idPersona)
     {
+        $connection='mysql';
+        $db = DB::connection($connection);
+        //$input = $request->all();
+        $persona=$db->select('select * from personas where idPersona=51');
 
-        $persona = persona::on('mysql')->find($idPersona);//DB::connection('mysql')->select('select * from personas where idPersona=$idPersona');
-        //
-        
         if (empty($persona)) {
             Flash::error('Persona not found');
 

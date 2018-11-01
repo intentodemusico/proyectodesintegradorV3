@@ -23,7 +23,7 @@ class persona extends Model
     
     use SoftDeletes;
 
-    public $table = 'personas';
+    protected $table = 'personas';
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';

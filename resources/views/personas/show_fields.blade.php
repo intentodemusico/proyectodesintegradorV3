@@ -1,3 +1,9 @@
+<!-- Nombre Field -->
+<div class="form-group">
+    {!! Form::label('Nombre', 'Nombre:') !!}
+    <p>{!! $persona->Nombre !!}</p>
+</div>
+
 <!-- Apellido Field -->
 <div class="form-group">
     {!! Form::label('Apellido', 'Apellido:') !!}
@@ -16,17 +22,6 @@
     <p>{!! $persona->Direccion !!}</p>
 </div>
 
-<!-- Idpersona Field -->
-<div class="form-group">
-    {!! Form::label('idPersona', 'Idpersona:') !!}
-    <p>{!! $persona->idPersona !!}</p>
-</div>
-
-<!-- Nombre Field -->
-<div class="form-group">
-    {!! Form::label('Nombre', 'Nombre:') !!}
-    <p>{!! $persona->Nombre !!}</p>
-</div>
 
 <!-- Telefono Field -->
 <div class="form-group">
